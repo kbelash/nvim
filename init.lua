@@ -40,12 +40,19 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+local function splitted(f)
+  return function()
+    vim.cmd("vsplit")
+    f()
+  end
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local opts = { buffer = args.buf }
 
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", splitted(vim.lsp.buf.definition), opts)
+    vim.keymap.set("n", "gD", splitted(vim.lsp.buf.declaration), opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
