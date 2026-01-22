@@ -32,20 +32,28 @@ vim.api.nvim_create_autocmd("FileType", {
       name = "clangd",
       cmd = { "clangd" },
       root_dir = vim.fs.root(0, {
-        "compile_commands.json",
-        "compile_flags.txt",
         ".git",
+        ".clang-format",
+        ".clangd",
+        "CMakePresets.json"
       }),
     })
   end,
 })
 
+local function splitted(f)
+  return function()
+    vim.cmd("vsplit")
+    f()
+  end
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local opts = { buffer = args.buf }
 
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", splitted(vim.lsp.buf.definition), opts)
+    vim.keymap.set("n", "gD", splitted(vim.lsp.buf.declaration), opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -123,6 +131,7 @@ vim.cmd [[set clipboard=unnamedplus]]
 vim.cmd.command('GoBuild vs | ter go build main.go')
 vim.cmd.command('GoRun vs | ter go run main.go')
 vim.cmd.command('Build vs | ter cmake --workflow default')
+vim.cmd.command('HostBuild vs | ter cmake --workflow host')
 
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
