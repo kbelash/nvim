@@ -120,15 +120,9 @@ vim.opt.signcolumn = "yes"
 vim.cmd [[set cinoptions=l1]]
 vim.cmd [[set clipboard=unnamedplus]]
 
-vim.cmd.command('Debug vs | ter .\\debug.rdbg')
 vim.cmd.command('GoBuild vs | ter go build main.go')
 vim.cmd.command('GoRun vs | ter go run main.go')
-vim.cmd.command('BuildAndTest vs | ter cmake --build build&&ctest --test-dir build')
-vim.cmd.command('Build vs | ter cmake --build build && cd build && ctest . --output-on-failure')
-vim.cmd.command('TestBuild vs | ter cmake --build build-tests && cd build-tests/unit_tests && ctest . --output-on-failure')
-vim.cmd.command('BuildRelease vs | ter cmake --build build --config Release')
-vim.cmd.command('CMakeConfig vs | ter cmake -B build')
-vim.cmd.command('CMakeConfigNinja vs | ter cmake -B build -G"Ninja Multi-Config"')
+vim.cmd.command('Build vs | ter cmake --workflow default')
 
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
