@@ -131,6 +131,7 @@ vim.cmd [[set clipboard=unnamedplus]]
 vim.cmd.command('GoBuild vs | ter go build main.go')
 vim.cmd.command('GoRun vs | ter go run main.go')
 vim.cmd.command('Build vs | ter cmake --workflow default')
+vim.cmd.command('ReleaseBuild vs | ter cmake --workflow release')
 vim.cmd.command('HostBuild vs | ter cmake --workflow host')
 
 vim.o.autoread = true
