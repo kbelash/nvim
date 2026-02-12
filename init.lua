@@ -113,18 +113,17 @@ augroup END
 ]]
 end
 
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.softtabstop = 2
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.autoindent = true
 vim.o.nu = true
 vim.o.rnu = true
 vim.o.swapfile = false 
 vim.o.splitright = true
-vim.o.guifont = "Noto Sans Mono SemiCondensed:h11"
 vim.opt.signcolumn = "yes"
-
+vim.cmd [[color habamax]]
 vim.cmd [[set cinoptions=l1]]
 vim.cmd [[set clipboard=unnamedplus]]
 
