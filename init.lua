@@ -123,7 +123,8 @@ vim.o.rnu = true
 vim.o.swapfile = false 
 vim.o.splitright = true
 vim.opt.signcolumn = "yes"
-vim.cmd [[color habamax]]
+vim.o.background = "dark"
+vim.cmd [[color wildcharm]]
 vim.cmd [[set cinoptions=l1]]
 vim.cmd [[set clipboard=unnamedplus]]
 
@@ -138,3 +139,4 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
   command = "if mode() != 'c' | checktime | endif",
   pattern = { "*" },
 })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
