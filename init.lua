@@ -24,6 +24,7 @@ end
 InstallPlugin("formatter.nvim", "https://github.com/mhartington/formatter.nvim.git")
 InstallPlugin("telescope.nvim", "https://github.com/nvim-telescope/telescope.nvim.git")
 InstallPlugin("plenary.nvim", "https://github.com/nvim-lua/plenary.nvim.git")
+InstallPlugin("lazygit.nvim", "https://github.com/kdheepak/lazygit.nvim.git")
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "c", "cpp", "objc", "objcpp", "h", "hh", "hpp", "hxx", "cc", "cxx" },
