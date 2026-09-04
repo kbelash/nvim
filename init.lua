@@ -18,6 +18,7 @@ local function InstallPlugin(name, repo)
       repo,
       path,
     })
+    print("Installed " .. repo)
   end
 end
 
