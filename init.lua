@@ -27,21 +27,20 @@ InstallPlugin("telescope.nvim", "https://github.com/nvim-telescope/telescope.nvi
 InstallPlugin("plenary.nvim", "https://github.com/nvim-lua/plenary.nvim.git")
 InstallPlugin("lazygit.nvim", "https://github.com/kdheepak/lazygit.nvim.git")
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp", "objc", "objcpp", "h", "hh", "hpp", "hxx", "cc", "cxx" },
-  callback = function()
-    vim.lsp.start({
-      name = "clangd",
-      cmd = { "clangd" },
-      root_dir = vim.fs.root(0, {
-        ".git",
-        ".clang-format",
-        ".clangd",
-        "CMakePresets.json"
-      }),
-    })
-  end,
+vim.lsp.config("clangd", {
+    cmd = { "clangd" },
+    filetypes = { "c", "cpp", "cc", "cxx", "objc", "objcpp", "h", "hh", "hpp", "hxx" },
+    root_markers = { ".git", ".clang-format", ".clangd", "CMakePresents.json"}
 })
+
+vim.lsp.config("gopls", {
+  cmd = { "gopls" },
+  filetypes = { "go" },
+  root_markers = { "go.work", "go.mod", ".git" },
+})
+
+vim.lsp.enable("clangd")
+vim.lsp.enable("gopls")
 
 local function splitted(f)
   return function()
@@ -135,6 +134,7 @@ vim.cmd.command('GoRun vs | ter go run main.go')
 vim.cmd.command('Build vs | ter cmake --workflow default')
 vim.cmd.command('ReleaseBuild vs | ter cmake --workflow release')
 vim.cmd.command('HostBuild vs | ter cmake --workflow host')
+vim.cmd.command('Run vs | ter clang++ -std=c++23 main.cpp -g && ./a.out')
 
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
